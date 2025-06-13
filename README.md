@@ -29,14 +29,14 @@ Este projeto é um editor de imagens interativo desenvolvido em Python com inter
 ```
 image_editor/
 ├── main.py
-├── histogram_module.py
-├── intensity_module.py
-├── lowpass_filters_module.py
-├── highpass_filters_module.py
-├── frequency_module.py
-├── fourier_spectrum_module.py
-├── morphology_module.py
-├── segmentation_module.py
+├── histograma.py
+├── intensidade.py
+├── passa_baixa.py
+├── passa_alta.py
+├── frequencia.py
+├── fourier.py
+├── morfologia.py
+├── segmentacao.py
 ```
 
 ## 🚀 Como Executar
@@ -75,8 +75,5 @@ python main.py
 - Recomenda-se usar imagens de tamanho moderado para melhor desempenho.
 
 ## 📚 Licença
-
-Este projeto é de uso acadêmico e está sujeito às diretrizes da disciplina SIN392.
-
 ---
-Desenvolvido com ❤️ para a disciplina de Processamento Digital de Imagens.
+Desenvolvido para a disciplina de Processamento Digital de Imagens.
