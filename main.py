@@ -43,13 +43,10 @@ class ImageEditor(QMainWindow):
         menubar = self.menuBar()
 
         menu_arquivo = menubar.addMenu("Arquivo")
-
         abrir = QAction("Abrir Imagem", self)
         abrir.triggered.connect(self.carregar_imagem)
-
         salvar = QAction("Salvar Imagem Processada", self)
         salvar.triggered.connect(self.salvar_imagem)
-
         restaurar = QAction("Restaurar Original", self)
         restaurar.triggered.connect(self.restaurar_imagem)
 
@@ -58,28 +55,27 @@ class ImageEditor(QMainWindow):
         menu_arquivo.addAction(restaurar)
 
         menu_op = menubar.addMenu("Operações")
+        menu_op.addAction("Histograma", lambda: exibir_histograma(self.imagem_processada if self.imagem_processada is not None else self.imagem_original))
+        menu_op.addAction("Alargamento de Contraste", lambda: self.aplicar_processo(alargamento_contraste))
+        menu_op.addAction("Equalização de Histograma", lambda: self.aplicar_processo(equalizacao_histograma))
 
-        acoes = {
-            "Histograma": lambda: exibir_histograma(self.imagem_processada if self.imagem_processada is not None else self.imagem_original),
-            "Alargamento de Contraste": lambda: self.aplicar_processo(alargamento_contraste),
-            "Equalização de Histograma": lambda: self.aplicar_processo(equalizacao_histograma),
-            "Filtro Média": lambda: self.aplicar_processo(filtro_media),
-            "Filtro Mediana": lambda: self.aplicar_processo(filtro_mediana),
-            "Filtro Gaussiano": lambda: self.aplicar_processo(filtro_gaussiano),
-            "Filtro Sobel": lambda: self.aplicar_processo(filtro_sobel),
-            "Filtro Laplaciano": lambda: self.aplicar_processo(filtro_laplaciano),
-            "Filtro Freq. Baixa": lambda: self.aplicar_processo(filtro_freq_passa_baixa),
-            "Filtro Freq. Alta": lambda: self.aplicar_processo(filtro_freq_passa_alta),
-            "Espectro de Fourier": lambda: mostrar_espectro(self.imagem_processada if self.imagem_processada is not None else self.imagem_original),
-            "Erosão": lambda: self.aplicar_processo(aplicar_erosao),
-            "Dilatação": lambda: self.aplicar_processo(aplicar_dilatacao),
-            "Segmentação Otsu": lambda: self.aplicar_processo(segmentacao_otsu),
-        }
+        menu_passa_baixa = menu_op.addMenu("Filtros Passa-Baixa")
+        menu_passa_baixa.addAction("Média", lambda: self.aplicar_processo(filtro_media))
+        menu_passa_baixa.addAction("Mediana", lambda: self.aplicar_processo(filtro_mediana))
+        menu_passa_baixa.addAction("Gaussiano", lambda: self.aplicar_processo(filtro_gaussiano))
 
-        for nome, func in acoes.items():
-            acao = QAction(nome, self)
-            acao.triggered.connect(func)
-            menu_op.addAction(acao)
+        menu_passa_alta = menu_op.addMenu("Filtros Passa-Alta")
+        menu_passa_alta.addAction("Sobel", lambda: self.aplicar_processo(filtro_sobel))
+        menu_passa_alta.addAction("Laplaciano", lambda: self.aplicar_processo(filtro_laplaciano))
+        menu_passa_alta.addAction("Roberts", lambda: self.aplicar_processo(filtro_roberts))
+        menu_passa_alta.addAction("Prewitt", lambda: self.aplicar_processo(filtro_prewitt))
+
+        menu_op.addAction("Filtro Freq. Baixa", lambda: self.aplicar_processo(filtro_freq_passa_baixa))
+        menu_op.addAction("Filtro Freq. Alta", lambda: self.aplicar_processo(filtro_freq_passa_alta))
+        menu_op.addAction("Espectro de Fourier", lambda: mostrar_espectro(self.imagem_processada if self.imagem_processada is not None else self.imagem_original))
+        menu_op.addAction("Erosão", lambda: self.aplicar_processo(aplicar_erosao))
+        menu_op.addAction("Dilatação", lambda: self.aplicar_processo(aplicar_dilatacao))
+        menu_op.addAction("Segmentação Otsu", lambda: self.aplicar_processo(segmentacao_otsu))
 
     def carregar_imagem(self):
         caminho, _ = QFileDialog.getOpenFileName(self, 'Abrir imagem', '', 'Imagens (*.png *.jpg *.bmp)')
