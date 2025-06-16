@@ -11,7 +11,7 @@ from PyQt5.QtCore import Qt
 from histograma import exibir_histograma
 from intensidade import alargamento_contraste, equalizacao_histograma
 from passa_baixa import filtro_media, filtro_mediana, filtro_gaussiano
-from passa_alta import filtro_laplaciano, filtro_sobel
+from passa_alta import filtro_laplaciano, filtro_sobel,filtro_roberts,filtro_prewitt
 from frequencia import filtro_freq_passa_baixa, filtro_freq_passa_alta
 from fourier import mostrar_espectro
 from morfologia import aplicar_erosao, aplicar_dilatacao
