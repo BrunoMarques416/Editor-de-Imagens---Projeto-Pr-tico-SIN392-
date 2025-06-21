@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt
 
 from histograma import exibir_histograma
 from intensidade import alargamento_contraste, equalizacao_histograma
-from passa_baixa import filtro_media, filtro_mediana, filtro_gaussiano
+from passa_baixa import filtro_media, filtro_mediana, filtro_gaussiano,filtro_maximo, filtro_minimo
 from passa_alta import filtro_laplaciano, filtro_sobel,filtro_roberts,filtro_prewitt
 from frequencia import filtro_freq_passa_baixa, filtro_freq_passa_alta
 from fourier import mostrar_espectro
@@ -63,6 +63,8 @@ class ImageEditor(QMainWindow):
         menu_passa_baixa.addAction("Média", lambda: self.aplicar_processo(filtro_media))
         menu_passa_baixa.addAction("Mediana", lambda: self.aplicar_processo(filtro_mediana))
         menu_passa_baixa.addAction("Gaussiano", lambda: self.aplicar_processo(filtro_gaussiano))
+        menu_passa_baixa.addAction("Máximo", lambda: self.aplicar_processo(filtro_maximo))
+        menu_passa_baixa.addAction("Mínimo", lambda: self.aplicar_processo(filtro_minimo))
 
         menu_passa_alta = menu_op.addMenu("Filtros Passa-Alta")
         menu_passa_alta.addAction("Sobel", lambda: self.aplicar_processo(filtro_sobel))
